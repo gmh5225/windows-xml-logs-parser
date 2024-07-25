@@ -2,7 +2,7 @@
 #define LOGPARSER_H
 
 #include <QObject>
-#include <QtXml/QXmlStreamReader>
+#include <QXmlStreamReader>
 #include "commons/exception.h"
 #include "eventsparsers/parsers.h"
 #include <QHash>

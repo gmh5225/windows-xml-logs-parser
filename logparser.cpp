@@ -54,7 +54,8 @@ void LogParser::parse(QIODevice* device)
     while(!xsr.atEnd() && !xsr.hasError())
     {
 		readed = xsr.readNext();
-		if(readed == QXmlStreamReader::StartElement && xsr.name().compare("EventID", Qt::CaseInsensitive) == 0)
+        QString qcmp = "EventID";
+        if(readed == QXmlStreamReader::StartElement && xsr.name().compare(qcmp, Qt::CaseSensitivity::CaseInsensitive) == 0)
 		{
 			bool ok = true;
 			QString tmp = xsr.readElementText(QXmlStreamReader::SkipChildElements);

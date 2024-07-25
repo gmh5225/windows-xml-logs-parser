@@ -17,7 +17,10 @@ Event* UserLogedOutEventParser::parseEvent(QXmlStreamReader& xml)
     while(xml.atEnd() == false)
     {
 		readed = xml.readNext();
-		if(xml.name().compare("TimeCreated", Qt::CaseSensitive) == 0 && readed == QXmlStreamReader::StartElement)
+        QString qcmp = "TimeCreated";
+        QString qcmp2 = "Data";
+        QString qcmp3 = "Event";
+        if(xml.name().compare(qcmp, Qt::CaseSensitive) == 0 && readed == QXmlStreamReader::StartElement)
 		{
 			tmp = xml.attributes().value("SystemTime").toString();
 			time = tmp.mid(0, 19);
@@ -31,7 +34,7 @@ Event* UserLogedOutEventParser::parseEvent(QXmlStreamReader& xml)
 					!(_filter->youngerThen() < otime && _filter->olderThen() > otime))
 				return 0;
 		}
-		else if(xml.name().compare("Data", Qt::CaseSensitive) == 0 && readed == QXmlStreamReader::StartElement)
+        else if(xml.name().compare(qcmp2, Qt::CaseSensitive) == 0 && readed == QXmlStreamReader::StartElement)
 		{
 			attribs = xml.attributes();
 			if(attribs.hasAttribute("", "Name"))
@@ -53,7 +56,7 @@ Event* UserLogedOutEventParser::parseEvent(QXmlStreamReader& xml)
 					tsession = val;
 			}
 		}
-		else if(xml.name().compare("Event", Qt::CaseSensitive) == 0 && readed == QXmlStreamReader::EndElement)
+        else if(xml.name().compare(qcmp3, Qt::CaseSensitive) == 0 && readed == QXmlStreamReader::EndElement)
 			break;
     }
     if(xml.hasError())
